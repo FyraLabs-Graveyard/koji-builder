@@ -15,7 +15,16 @@ docker-build:
   image: docker
   stage: build
   services:
-    - docker:dind
+   - name: docker:dind
+     alias: thedockerhost
+
+  variables:
+    # Tell docker CLI how to talk to Docker daemon; see
+    # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor
+    DOCKER_HOST: tcp://thedockerhost:2375/
+    # Use the overlayfs driver for improved performance:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   # Default branch leaves tag empty (= latest tag)
