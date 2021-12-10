@@ -1,0 +1,11 @@
+version: '3'
+services:
+  builder:
+    privileged: true
+    image: koji-builder
+    volumes:
+      - <path>:/opt/kojid.keytab,
+      - <path>:/opt/kojid.conf
+    environment:
+      NFS_SERVER: <ip>,
+      HOSTNAME: <hostname>
