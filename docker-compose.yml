@@ -2,7 +2,7 @@ version: '3'
 services:
   builder:
     privileged: true
-    image: koji-builder
+    image: gitlab.ultramarine-linux.org:5050/release-engineering/koji-builder:latest
     volumes:
       - <path>:/opt/kojid.keytab,
       - <path>:/opt/kojid.conf
